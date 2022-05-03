@@ -25,7 +25,7 @@ public class XmlReader{
             Document doc = dB.parse(filepath);
 
             Element root =doc.getDocumentElement();
-
+/*
             System.out.println(root.getNodeName());
             System.out.println(root.getNodeType());
 
@@ -39,18 +39,16 @@ public class XmlReader{
             System.out.println(root.getTextContent());//kiirja az sml-t de csak a szöveget
 
             System.out.println();
-
+*/
             NodeList child = root.getChildNodes();
-            System.out.println(child.getLength());
 
-            System.out.println("------------------------------------");
 
             int numelement = 0;
             Node node;
             for (int i = 0; i < child.getLength(); i++) {
                 node = child.item(i);
                 if(node.getNodeType()== Node.ELEMENT_NODE){
-                    System.out.println(node.getTextContent());
+                    //System.out.println(node.getTextContent());
                     numelement++;
                    NodeList childnode= node.getChildNodes();
                    String name ="",id ="",veny="";
@@ -68,7 +66,7 @@ public class XmlReader{
                     pills.add(new Pill(name,Integer.parseInt(id),Integer.parseInt(veny)));
                 }
             }
-            System.out.println("pillek száma: "+numelement+"db");
+            //System.out.println("pillek száma: "+numelement+"db");
 
         }catch(Exception e){
             e.printStackTrace();
