@@ -53,22 +53,22 @@ public class XmlReader{
                     System.out.println(node.getTextContent());
                     numelement++;
                    NodeList childnode= node.getChildNodes();
-                   String name ="",birthyear ="",address="",eyecolor="";
+                   String name ="",id ="",veny="";
                     for (int j = 0; j < childnode.getLength(); j++) {
                         if(childnode.item(j).getNodeType()==Node.ELEMENT_NODE){
                             switch (childnode.item(j).getNodeName()) {
                                 case "name" -> name = childnode.item(j).getTextContent();
-                                case "birthYear" -> birthyear = childnode.item(j).getTextContent();
-                                case "address" -> address = childnode.item(j).getTextContent();
-                                case "eyeColor" -> eyecolor = childnode.item(j).getTextContent();
+                                case "id" -> id = childnode.item(j).getTextContent();
+                                case "veny" -> veny = childnode.item(j).getTextContent();
+
                             }
                         }
 
                     }
-                    //pills.add(new Pill(name,Integer.parseInt(birthyear),address,eyecolor));
+                    pills.add(new Pill(name,Integer.parseInt(id),Integer.parseInt(veny)));
                 }
             }
-            System.out.println("userek száma: "+numelement+"db");
+            System.out.println("pillek száma: "+numelement+"db");
 
         }catch(Exception e){
             e.printStackTrace();

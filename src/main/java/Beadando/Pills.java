@@ -87,8 +87,22 @@ public class Pills {
         System.out.print("Enter id of new pilll: ");
         int id = scanner.nextInt();
 
-        System.out.print("Enter veny of new pilll (1 if veny 0 if not veny): ");
-        int veny = scanner.nextInt();
+        int veny =0;
+        while(true){
+
+            System.out.print("Enter veny of new pilll (1 if veny 0 if not veny): ");
+            try{
+                veny = scanner.nextInt();
+                if(veny!=0 && veny !=1){
+                    throw new HibasVeny();
+                }
+                break;
+            }catch (HibasVeny hv){
+                System.out.println("Hibás veny érték");
+            }
+
+        }
+
 
         pills.add(new Pill(name,id,veny));
     }
@@ -96,7 +110,16 @@ public class Pills {
 
 
     private static void listPill(ArrayList<Pill> pills) {
-        System.out.println(pills);
+        for(Pill pill:pills){
+            if(pill.getVeny()==1){
+                System.out.println(pill.getName()+", "+pill.getId()+", Venyre kapható");
+            }
+            else if(pill.getVeny()==0){
+                System.out.println(pill.getName()+", "+pill.getId()+", Veny nelkül kapható");
+            }
+
+        }
+
     }
 
     public static void savePillsToXml(ArrayList<Pill> pills, String filepath) {
@@ -136,3 +159,7 @@ public class Pills {
     }
 
 }
+
+class HibasVeny extends Exception{
+
+        }

@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <pills>
-    <pill>
-        <name>Quamatel</name>
-        <id>12348</id>
+    <pills>
+        <name>Qumatel</name>
+        <id>876543</id>
         <veny>0</veny>
-
-    </pill>
-    <pill>
+    </pills>
+    <pills>
         <name>Advil</name>
-        <id>7654</id>
+        <id>472821</id>
         <veny>0</veny>
-
-    </pill>
-    <pill>
-        <name>Lindynette</name>
-        <id>9832</id>
+    </pills>
+    <pills>
+        <name>Neocitran</name>
+        <id>987601234</id>
+        <veny>0</veny>
+    </pills>
+    <pills>
+        <name>asdfg</name>
+        <id>2345</id>
         <veny>1</veny>
-
-    </pill>
+    </pills>
 </pills>
