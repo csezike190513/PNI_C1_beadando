@@ -25,21 +25,7 @@ public class XmlReader{
             Document doc = dB.parse(filepath);
 
             Element root =doc.getDocumentElement();
-/*
-            System.out.println(root.getNodeName());
-            System.out.println(root.getNodeType());
 
-            System.out.println();
-
-            System.out.println(Node.ELEMENT_NODE);
-            System.out.println(Node.TEXT_NODE);
-
-            System.out.println();
-
-            System.out.println(root.getTextContent());//kiirja az sml-t de csak a szöveget
-
-            System.out.println();
-*/
             NodeList child = root.getChildNodes();
 
 
