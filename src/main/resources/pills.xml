@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<pills>
+    <pill>
+        <name>Quamatel</name>
+        <id>12348</id>
+        <veny>0</veny>
+
+    </pill>
+    <pill>
+        <name>Advil</name>
+        <id>7654</id>
+        <veny>0</veny>
+
+    </pill>
+    <pill>
+        <name>Lindynette</name>
+        <id>9832</id>
+        <veny>1</veny>
+
+    </pill>
+</pills>
