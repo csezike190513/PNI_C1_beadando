@@ -220,13 +220,15 @@ public class Pills {
 
     private static void listPill(ArrayList<Pill> pills) {
         for(Pill pill:pills){
+            System.out.print(ANSI_BLACK_BACK);
             if(pill.getVeny()==1){
-                System.out.println(ANSI_BLACK_BACK+ANSI_YELLOW+pill.getName()+"\t"+pill.getId()+"\tVenyre kapható"+ANSI_RESET);
+
+                System.out.println(ANSI_YELLOW+pill.getName()+" - "+pill.getId()+" - Venyre kapható");
             }
             else if(pill.getVeny()==0){
-                System.out.println(ANSI_BLACK_BACK+ANSI_CYAN+pill.getName()+"\t"+pill.getId()+"\tVeny nelkül kapható"+ANSI_RESET);
+                System.out.println(ANSI_CYAN+pill.getName()+" - "+pill.getId()+" - Veny nelkül kapható");
             }
-
+            System.out.print(ANSI_RESET);
         }
         System.out.println("\n");
 
