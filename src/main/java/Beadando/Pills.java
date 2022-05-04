@@ -37,7 +37,7 @@ public class Pills {
                 case 3 -> modifyPill(pills);
                 case 4 -> deletePill(pills);
             }
-            System.out.println(ANSI_BLACK_BACK+ANSI_BLUE+"\n1 - List pills\r\n2 - Add new pill\r\n"
+            System.out.println(ANSI_BLACK_BACK+ANSI_BLUE+"1 - List pills\r\n2 - Add new pill\r\n"
                     + "3 - Modify a pill\r\n4 - Delete a pill\r\n0 - Exit\n"+ANSI_RESET);
             try {
                 choice = scanner.nextInt();
@@ -95,7 +95,38 @@ public class Pills {
     public static  void ModId(ArrayList<Pill> pills,String name){
         for (Pill pill : pills) {
             if (pill.getName().equals(name)) {
-                String id = IdletezikBe(pills);
+                String id = "";
+                String id2;
+                boolean igaz=false;
+                System.out.print("Enter id (min 3, max 10 karakter): \n");
+                while(igaz==false){
+
+                    try{
+                        //System.out.println("uj id");
+                         id = scanner.next();
+
+                        for (int i = 0; i < pills.size(); i++) {
+                            if(id.equals(pills.get(i).getId())){
+                                throw new LetezoId();
+                            }
+                            else if(id.length()>10 || id.length()<3) {
+
+                                throw new HibasId();
+                            }
+                            else{
+                                igaz = true;
+                                break;
+                            }
+                        }
+                    }catch (HibasId hi){
+                        System.err.println("nem jo id hossz \nProbálja ujra");
+                    }catch (LetezoId hi){
+                        System.err.println("Már Létezik ilyen idval rendelkező Pill \nProbálja ujra");
+                    }
+
+                }
+
+                        //IdletezikBe(pills);
                 pills.set(pills.indexOf(pill), new Pill(name,id, pill.getVeny()));
             }
         }
@@ -282,21 +313,25 @@ public class Pills {
         String id ="";
 boolean igaz=false;
         while(igaz==false){
-            System.out.println("Enter id (min 3, max 10 karakter): ");
+
             //scanner.nextLine();
-            id = scanner.nextLine();
 
             try{
-
+                System.out.println("Enter id (min 3, max 10 karakter): ");
+                id = scanner.nextLine();
                 for (int i = 0; i < pills.size(); i++) {
+                    System.out.println("ide?");
                     if(id.equals(pills.get(i).getId())){
+                        System.out.println("szar");
                         throw new LetezoId();
 
                     }
                     else if(id.length()>10 || id.length()<3) {
+                        System.out.println("ez szar");
                         throw new HibasId();
                     }
                     else {
+                        System.out.println("ez basz ki ");
                         igaz = true;
                         break;
                     }
