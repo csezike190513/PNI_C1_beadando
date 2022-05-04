@@ -280,12 +280,12 @@ public class Pills {
 
     public static String IdletezikBe(ArrayList<Pill> pills ){
         String id ="";
-
-        while(id== ""){
-
+boolean igaz=false;
+        while(igaz==false){
             System.out.println("Enter id (min 3, max 10 karakter): ");
             //scanner.nextLine();
             id = scanner.nextLine();
+
             try{
 
                 for (int i = 0; i < pills.size(); i++) {
@@ -297,11 +297,12 @@ public class Pills {
                         throw new HibasId();
                     }
                     else {
+                        igaz = true;
                         break;
                     }
                 }
             }catch (HibasId hi){
-                System.err.println("Túl hosszu id érték");
+                System.err.println("nem jo id hossz");
             }catch (LetezoId hi){
                 System.err.println("Már Létezik ilyen idval rendelkező Pill");
             }
