@@ -283,8 +283,8 @@ public class Pills {
 
         while(id== ""){
 
-            System.out.println("Enter id (max 10 karakter): ");
-            scanner.nextLine();
+            System.out.println("Enter id (min 3, max 10 karakter): ");
+            //scanner.nextLine();
             id = scanner.nextLine();
             try{
 
@@ -293,7 +293,7 @@ public class Pills {
                         throw new LetezoId();
 
                     }
-                    else if(id.length()>10) {
+                    else if(id.length()>10 || id.length()<3) {
                         throw new HibasId();
                     }
                     else {

@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <pills>
     <pills>
-        <name>Qumatel</name>
-        <id>876543</id>
-        <veny>0</veny>
-    </pills>
-    <pills>
         <name>Neocitran</name>
         <id>98oi234</id>
         <veny>0</veny>
     </pills>
     <pills>
         <name>Lindynette</name>
-        <id>5666</id>
+        <id>4567</id>
         <veny>1</veny>
     </pills>
 </pills>
