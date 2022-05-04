@@ -310,36 +310,33 @@ public class Pills {
     }
 
     public static String IdletezikBe(ArrayList<Pill> pills ){
-        String id ="";
-boolean igaz=false;
+        String id = "";
+        String id2;
+        boolean igaz=false;
+        System.out.print("Enter id (min 3, max 10 karakter): \n");
         while(igaz==false){
 
-            //scanner.nextLine();
-
             try{
-                System.out.println("Enter id (min 3, max 10 karakter): ");
-                id = scanner.nextLine();
-                for (int i = 0; i < pills.size(); i++) {
-                    System.out.println("ide?");
-                    if(id.equals(pills.get(i).getId())){
-                        System.out.println("szar");
-                        throw new LetezoId();
+                //System.out.println("uj id");
+                id = scanner.next();
 
+                for (int i = 0; i < pills.size(); i++) {
+                    if(id.equals(pills.get(i).getId())){
+                        throw new LetezoId();
                     }
                     else if(id.length()>10 || id.length()<3) {
-                        System.out.println("ez szar");
+
                         throw new HibasId();
                     }
-                    else {
-                        System.out.println("ez basz ki ");
+                    else{
                         igaz = true;
                         break;
                     }
                 }
             }catch (HibasId hi){
-                System.err.println("nem jo id hossz");
+                System.err.println("nem jo id hossz \nProbálja ujra");
             }catch (LetezoId hi){
-                System.err.println("Már Létezik ilyen idval rendelkező Pill");
+                System.err.println("Már Létezik ilyen idval rendelkező Pill \nProbálja ujra");
             }
 
         }
