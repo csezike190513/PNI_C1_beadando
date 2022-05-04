@@ -37,16 +37,16 @@ public class Pills {
                 case 3 -> modifyPill(pills);
                 case 4 -> deletePill(pills);
             }
-            System.out.println(ANSI_BLACK_BACK+ANSI_BLUE+"1 - List pills\r\n2 - Add new pill\r\n"
+            System.out.println(ANSI_BLACK_BACK+ANSI_BLUE+"\n1 - List pills\r\n2 - Add new pill\r\n"
                     + "3 - Modify a pill\r\n4 - Delete a pill\r\n0 - Exit\n"+ANSI_RESET);
             try {
                 choice = scanner.nextInt();
                 scanner.nextLine();
                 if (choice < 0 || choice > 4) {
-                    err.println("Not valid option.\n");
+                    err.println("Not valid option.");
                 }
             } catch (InputMismatchException e) {
-                err.println("Not valid option.\n");
+                System.err.println("Not valid option.");
                 scanner.nextLine();
             }
         }
@@ -55,12 +55,14 @@ public class Pills {
     }
 
     private static void modifyPill(ArrayList<Pill> pills) {
-        System.out.print("Enter name of pill what you want to modify: ");
+        System.out.println("Enter name of pill what you want to modify: ");
         String name = scanner.nextLine();
+        int choice = -1;
         for (Pill pill : pills) {
+
             if (pill.getName().equals(name)) {
 
-                int choice = -1;
+
                 while (choice != 0) {
                     switch (choice) {
                         case 1 -> ModId(pills,name);
@@ -70,18 +72,24 @@ public class Pills {
                             + "\r\n0 - Cancel\n"+ANSI_RESET);
                     try {
                         choice = scanner.nextInt();
-                        scanner.nextLine();
                         if (choice < 0 || choice > 2) {
-                            err.println("Not valid option.\n");
+                            System.err.println("Not valid option.");
+                            break;
+                        }
+                        if(choice==0){
+                            break;
                         }
                     } catch (InputMismatchException e) {
-                        err.println("Not valid option.\n");
+                        System.err.println("Not valid option.");
                         scanner.nextLine();
                     }
                 }
+                break;
             }
+
         }
-        err.println("There is no pill with this name.\n");
+        if(choice!=0) System.err.println("There is no pill with this name.");
+
     }
 
     public static  void ModId(ArrayList<Pill> pills,String name){
@@ -100,7 +108,7 @@ public class Pills {
             if (pill.getName().equals(name)) {
 
                 while(true){
-                    System.out.print("Enter veny (1 if veny 0 if not veny): ");
+                    System.out.println("Enter veny (1 if veny 0 if not veny): ");
                     int veny =0;
                     try{
                         veny = scanner.nextInt();
@@ -110,9 +118,9 @@ public class Pills {
                         pills.set(pills.indexOf(pill), new Pill(name,pill.getId(), veny));
                         break;
                     }catch (HibasVeny hv){
-                        err.println("Hibás veny érték");
+                        System.err.println("Hibás veny érték");
                     }catch (Exception e){
-                        err.println("nem szám Veny érték");
+                        System.err.println("nem szám Veny érték");
                         scanner.nextLine();
                     }
                 }
@@ -135,16 +143,16 @@ public class Pills {
                 choice = scanner.nextInt();
                 scanner.nextLine();
                 if (choice < 0 || choice > 2) {
-                    err.println("Not valid option.\n");
+                    System.err.println("Not valid option.");
                 }
             } catch (InputMismatchException e) {
-                err.println("Not valid option.\n");
+                System.err.println("Not valid option.");
                 scanner.nextLine();
             }
         }
     }
     public static void DelName(ArrayList<Pill> pills){
-        System.out.print("Enter name of pill what you want to delete: ");
+        System.out.println("Enter name of pill what you want to delete: ");
         String name = scanner.nextLine();
         for (Pill pill : pills) {
             if (pill.getName().equals(name)) {
@@ -153,10 +161,10 @@ public class Pills {
                 return;
             }
         }
-        err.println("There is no pill with this name.\n");
+        System.err.println("There is no pill with this name.\n");
     }
     public static void DelId(ArrayList<Pill> pills){
-        System.out.print("Enter id of pill what you want to delete: ");
+        System.out.println("Enter id of pill what you want to delete: ");
         String id = scanner.nextLine();
         for (Pill pill : pills) {
             if (pill.getId().equals(id)) {
@@ -165,7 +173,7 @@ public class Pills {
                 return;
             }
         }
-        err.println("There is no pill with this id.\n");
+        System.err.println("There is no pill with this id.");
     }
 
     private static void addNewPill(ArrayList<Pill> pills) {
@@ -173,7 +181,7 @@ public class Pills {
         String name ="";
         while(true){
 
-            System.out.print("Enter name of new pill: ");
+            System.out.println("Enter name of new pill: ");
             try{
                 name = scanner.nextLine();
                 for (int i = 0; i < pills.size(); i++) {
@@ -183,7 +191,7 @@ public class Pills {
                 }
                 break;
             }catch (HibasName hn){
-                err.println("Már létezik ilyen nevü pill,\n elöbb törölje a már meglévőt és kezdje ujra a folyamatot\n");
+                System.err.println("Már létezik ilyen nevü pill, elöbb törölje a már meglévőt és kezdje ujra a folyamatot");
             }
 
         }
@@ -194,7 +202,7 @@ public class Pills {
         int veny =0;
         while(true){
 
-            System.out.print("Enter veny of new pill (1 if veny 0 if not veny): ");
+            System.out.println("Enter veny of new pill (1 if veny 0 if not veny): ");
             veny =0;
             try{
                 veny = scanner.nextInt();
@@ -204,9 +212,9 @@ public class Pills {
                 }
                 break;
             }catch (HibasVeny hv){
-                err.println("Hibás veny érték\n");
+                System.err.println("Hibás veny érték");
             }catch (InputMismatchException e){
-                err.println("nem szám Veny érték\n");
+                System.err.println("nem szám Veny érték");
                 scanner.nextLine();
             }
 
@@ -214,6 +222,7 @@ public class Pills {
 
 
         pills.add(new Pill(name,id,veny));
+        System.out.println(ANSI_GREEN+"Uj pill sikeresen létrehozva"+ANSI_RESET);
     }
 
 
@@ -271,24 +280,30 @@ public class Pills {
 
     public static String IdletezikBe(ArrayList<Pill> pills ){
         String id ="";
-        while(true){
 
-            System.out.print("Enter id (max 10 karakter): ");
+        while(id== ""){
+
+            System.out.println("Enter id (max 10 karakter): ");
+            scanner.nextLine();
+            id = scanner.nextLine();
             try{
-                id = scanner.nextLine();
+
                 for (int i = 0; i < pills.size(); i++) {
                     if(id.equals(pills.get(i).getId())){
                         throw new LetezoId();
+
                     }
-                    if(id.length()>10) {
+                    else if(id.length()>10) {
                         throw new HibasId();
                     }
+                    else {
+                        break;
+                    }
                 }
-                break;
             }catch (HibasId hi){
-                err.println("Túl hosszu id érték\n");
+                System.err.println("Túl hosszu id érték");
             }catch (LetezoId hi){
-                err.println("Már Létezik ilyen idval rendelkező Pill\n");
+                System.err.println("Már Létezik ilyen idval rendelkező Pill");
             }
 
         }
