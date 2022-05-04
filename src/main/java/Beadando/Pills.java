@@ -19,9 +19,12 @@ import java.util.Scanner;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 
+import static java.lang.System.err;
+
 public class Pills {
 
     private static final Scanner scanner = new Scanner(System.in);
+
 
     public static void main(String[] args) {
 
@@ -34,16 +37,16 @@ public class Pills {
                 case 3 -> modifyPill(pills);
                 case 4 -> deletePill(pills);
             }
-            System.out.println("1 - List pills\r\n2 - Add new pill\r\n"
-                    + "3 - Modify a pill\r\n4 - Delete a pill\r\n0 - Exit");
+            System.out.println(ANSI_BLACK_BACK+ANSI_BLUE+"1 - List pills\r\n2 - Add new pill\r\n"
+                    + "3 - Modify a pill\r\n4 - Delete a pill\r\n0 - Exit\n"+ANSI_RESET);
             try {
                 choice = scanner.nextInt();
                 scanner.nextLine();
                 if (choice < 0 || choice > 4) {
-                    System.out.println("Not valid option.");
+                    err.println("Not valid option.\n");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Not valid option.");
+                err.println("Not valid option.\n");
                 scanner.nextLine();
             }
         }
@@ -63,22 +66,22 @@ public class Pills {
                         case 1 -> ModId(pills,name);
                         case 2 -> ModVeny(pills,name);
                     }
-                    System.out.println("1 - Modify Id\r\n2 - Modify Veny\r\n"
-                            + "\r\n0 - Cancel");
+                    System.out.println(ANSI_BLACK_BACK+ANSI_BLUE+"1 - Modify Id\r\n2 - Modify Veny\r\n"
+                            + "\r\n0 - Cancel\n"+ANSI_RESET);
                     try {
                         choice = scanner.nextInt();
                         scanner.nextLine();
                         if (choice < 0 || choice > 2) {
-                            System.out.println("Not valid option.");
+                            err.println("Not valid option.\n");
                         }
                     } catch (InputMismatchException e) {
-                        System.out.println("Not valid option.");
+                        err.println("Not valid option.\n");
                         scanner.nextLine();
                     }
                 }
             }
         }
-        System.out.println("There is no pill with this name.");
+        err.println("There is no pill with this name.\n");
     }
 
     public static  void ModId(ArrayList<Pill> pills,String name){
@@ -88,7 +91,7 @@ public class Pills {
                 pills.set(pills.indexOf(pill), new Pill(name,id, pill.getVeny()));
             }
         }
-        System.out.println("Pill is successfully modified id.");
+        System.out.println(ANSI_GREEN+"Pill is successfully modified id.\n"+ANSI_RESET);
         return;
     }
 
@@ -107,29 +110,62 @@ public class Pills {
                         pills.set(pills.indexOf(pill), new Pill(name,pill.getId(), veny));
                         break;
                     }catch (HibasVeny hv){
-                        System.out.println("Hibás veny érték");
+                        err.println("Hibás veny érték");
                     }catch (Exception e){
-                        System.out.println("nem szám Veny érték");
+                        err.println("nem szám Veny érték");
                         scanner.nextLine();
                     }
                 }
             }
         }
-        System.out.println("Pill is successfully modified veny.");
+        System.out.println(ANSI_GREEN+"Pill is successfully modified veny.\n"+ANSI_RESET);
         return;
     }
 
     private static void deletePill(ArrayList<Pill> pills) {
+        int choice = -1;
+        while (choice != 0) {
+            switch (choice) {
+                case 1 -> DelName(pills);
+                case 2 -> DelId(pills);
+            }
+            System.out.println(ANSI_BLACK_BACK+ANSI_BLUE+"1 - Delete about Name\r\n2 - Delete about Id\r\n"
+                    + "\r\n0 - Cancel\n"+ANSI_RESET);
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine();
+                if (choice < 0 || choice > 2) {
+                    err.println("Not valid option.\n");
+                }
+            } catch (InputMismatchException e) {
+                err.println("Not valid option.\n");
+                scanner.nextLine();
+            }
+        }
+    }
+    public static void DelName(ArrayList<Pill> pills){
         System.out.print("Enter name of pill what you want to delete: ");
         String name = scanner.nextLine();
         for (Pill pill : pills) {
             if (pill.getName().equals(name)) {
                 pills.remove(pill);
-                System.out.println("Pill is successfully deleted.");
+                System.out.println(ANSI_GREEN+"Pill is successfully deleted.\n"+ANSI_RESET);
                 return;
             }
         }
-        System.out.println("There is no pill with this name.");
+        err.println("There is no pill with this name.\n");
+    }
+    public static void DelId(ArrayList<Pill> pills){
+        System.out.print("Enter id of pill what you want to delete: ");
+        String id = scanner.nextLine();
+        for (Pill pill : pills) {
+            if (pill.getId().equals(id)) {
+                pills.remove(pill);
+                System.out.println(ANSI_GREEN+"Pill is successfully deleted.\n"+ANSI_RESET);
+                return;
+            }
+        }
+        err.println("There is no pill with this id.\n");
     }
 
     private static void addNewPill(ArrayList<Pill> pills) {
@@ -147,7 +183,7 @@ public class Pills {
                 }
                 break;
             }catch (HibasName hn){
-                System.out.println("Már létezik ilyen nevü pill,\n elöbb törölje a már meglévőt és kezdje ujra a folyamatot");
+                err.println("Már létezik ilyen nevü pill,\n elöbb törölje a már meglévőt és kezdje ujra a folyamatot\n");
             }
 
         }
@@ -168,9 +204,9 @@ public class Pills {
                 }
                 break;
             }catch (HibasVeny hv){
-                System.out.println("Hibás veny érték");
+                err.println("Hibás veny érték\n");
             }catch (InputMismatchException e){
-                System.out.println(e.getMessage());
+                err.println("nem szám Veny érték\n");
                 scanner.nextLine();
             }
 
@@ -185,13 +221,14 @@ public class Pills {
     private static void listPill(ArrayList<Pill> pills) {
         for(Pill pill:pills){
             if(pill.getVeny()==1){
-                System.out.println(pill.getName()+", "+pill.getId()+", Venyre kapható");
+                System.out.println(ANSI_BLACK_BACK+ANSI_YELLOW+pill.getName()+"\t"+pill.getId()+"\tVenyre kapható"+ANSI_RESET);
             }
             else if(pill.getVeny()==0){
-                System.out.println(pill.getName()+", "+pill.getId()+", Veny nelkül kapható");
+                System.out.println(ANSI_BLACK_BACK+ANSI_CYAN+pill.getName()+"\t"+pill.getId()+"\tVeny nelkül kapható"+ANSI_RESET);
             }
 
         }
+        System.out.println("\n");
 
     }
 
@@ -247,14 +284,23 @@ public class Pills {
                 }
                 break;
             }catch (HibasId hi){
-                System.out.println("Túl hosszu id érték");
+                err.println("Túl hosszu id érték\n");
             }catch (LetezoId hi){
-                System.out.println("Már Létezik ilyen idval rendelkező Pill");
+                err.println("Már Létezik ilyen idval rendelkező Pill\n");
             }
 
         }
         return id;
     }
+
+    public static final  String ANSI_BLUE = "\u001B[34m";
+    public static final  String ANSI_GREEN = "\u001B[32m";
+    public static final  String ANSI_YELLOW = "\u001B[33m";
+    public static final  String ANSI_CYAN = "\u001B[36m";
+
+    public static final  String ANSI_BLACK_BACK = "\u001B[40m";
+
+    public static final  String ANSI_RESET = "\u001B[0m";
 
 }
 
