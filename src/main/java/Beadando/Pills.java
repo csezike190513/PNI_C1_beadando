@@ -103,7 +103,7 @@ public class Pills {
 
                     try{
                         //System.out.println("uj id");
-                         id = scanner.next();
+                        id = scanner.next();
 
                         for (int i = 0; i < pills.size(); i++) {
                             if(id.equals(pills.get(i).getId())){
@@ -113,7 +113,7 @@ public class Pills {
 
                                 throw new HibasId();
                             }
-                            else{
+                            else if(i== pills.size()-1){
                                 igaz = true;
                                 break;
                             }
@@ -328,7 +328,7 @@ public class Pills {
 
                         throw new HibasId();
                     }
-                    else{
+                    else if(i== pills.size()-1){
                         igaz = true;
                         break;
                     }

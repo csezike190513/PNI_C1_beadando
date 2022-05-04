@@ -10,4 +10,14 @@
         <id>wert</id>
         <veny>1</veny>
     </pills>
+    <pills>
+        <name>asdf</name>
+        <id>12vgfv56</id>
+        <veny>0</veny>
+    </pills>
+    <pills>
+        <name>vbnm</name>
+        <id>yxcvbnm</id>
+        <veny>1</veny>
+    </pills>
 </pills>
