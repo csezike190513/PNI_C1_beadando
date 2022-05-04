@@ -19,7 +19,6 @@ public class XmlReader{
         ArrayList<Pill> pills = new ArrayList<>();
 
         try{
-
             DocumentBuilderFactory dBf = DocumentBuilderFactory.newInstance();
             DocumentBuilder dB = dBf.newDocumentBuilder();
             Document doc = dB.parse(filepath);
@@ -28,14 +27,10 @@ public class XmlReader{
 
             NodeList child = root.getChildNodes();
 
-
-            int numelement = 0;
             Node node;
             for (int i = 0; i < child.getLength(); i++) {
                 node = child.item(i);
                 if(node.getNodeType()== Node.ELEMENT_NODE){
-                    //System.out.println(node.getTextContent());
-                    numelement++;
                    NodeList childnode= node.getChildNodes();
                    String name ="",id ="",veny="";
                     for (int j = 0; j < childnode.getLength(); j++) {
@@ -44,31 +39,15 @@ public class XmlReader{
                                 case "name" -> name = childnode.item(j).getTextContent();
                                 case "id" -> id = childnode.item(j).getTextContent();
                                 case "veny" -> veny = childnode.item(j).getTextContent();
-
                             }
                         }
-
                     }
-                    pills.add(new Pill(name,Integer.parseInt(id),Integer.parseInt(veny)));
+                    pills.add(new Pill(name,id,Integer.parseInt(veny)));
                 }
             }
-            //System.out.println("pillek száma: "+numelement+"db");
-
         }catch(Exception e){
             e.printStackTrace();
         }
-
         return pills;
     }
-
-/*
-    public static void main(String[] args) {
-        ArrayList<Beadando.Pill> users =  readPillsFromXml("src/main/resources/pills.xml");
-        System.out.println("------------------------------------");
-        System.out.println("------------------------------------");
-        System.out.println("userek száma: "+users.size()+"db");
-        System.out.println();
-        System.out.println(users);
-    }*/
-
 }

@@ -7,17 +7,22 @@
     </pills>
     <pills>
         <name>Advil</name>
-        <id>472821</id>
-        <veny>0</veny>
+        <id>4728g21</id>
+        <veny>1</veny>
     </pills>
     <pills>
         <name>Neocitran</name>
-        <id>987601234</id>
+        <id>98oi234</id>
         <veny>0</veny>
     </pills>
     <pills>
-        <name>asdfg</name>
-        <id>2345</id>
+        <name>Koldrex</name>
+        <id>2645E</id>
+        <veny>0</veny>
+    </pills>
+    <pills>
+        <name>Lindynette</name>
+        <id>ert45</id>
         <veny>1</veny>
     </pills>
 </pills>

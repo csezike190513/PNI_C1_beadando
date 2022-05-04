@@ -52,23 +52,75 @@ public class Pills {
     }
 
     private static void modifyPill(ArrayList<Pill> pills) {
-        System.out.print("Enter name of user what you want to modify: ");
+        System.out.print("Enter name of pill what you want to modify: ");
         String name = scanner.nextLine();
         for (Pill pill : pills) {
             if (pill.getName().equals(name)) {
 
-                System.out.print("Enter id of new pill: ");
-                int id = scanner.nextInt();
-                pills.set(pills.indexOf(pill), new Pill(name,id, pill.getVeny()));
-                System.out.println("Pill is successfully modified.");
-                return;
+                int choice = -1;
+                while (choice != 0) {
+                    switch (choice) {
+                        case 1 -> ModId(pills,name);
+                        case 2 -> ModVeny(pills,name);
+                    }
+                    System.out.println("1 - Modify Id\r\n2 - Modify Veny\r\n"
+                            + "\r\n0 - Cancel");
+                    try {
+                        choice = scanner.nextInt();
+                        scanner.nextLine();
+                        if (choice < 0 || choice > 2) {
+                            System.out.println("Not valid option.");
+                        }
+                    } catch (InputMismatchException e) {
+                        System.out.println("Not valid option.");
+                        scanner.nextLine();
+                    }
+                }
             }
         }
         System.out.println("There is no pill with this name.");
     }
 
+    public static  void ModId(ArrayList<Pill> pills,String name){
+        for (Pill pill : pills) {
+            if (pill.getName().equals(name)) {
+                String id = IdletezikBe(pills);
+                pills.set(pills.indexOf(pill), new Pill(name,id, pill.getVeny()));
+            }
+        }
+        System.out.println("Pill is successfully modified id.");
+        return;
+    }
+
+    public static  void ModVeny(ArrayList<Pill> pills,String name){
+        for (Pill pill : pills) {
+            if (pill.getName().equals(name)) {
+
+                while(true){
+                    System.out.print("Enter veny (1 if veny 0 if not veny): ");
+                    int veny =0;
+                    try{
+                        veny = scanner.nextInt();
+                        if(veny!=0 && veny !=1){
+                            throw new HibasVeny();
+                        }
+                        pills.set(pills.indexOf(pill), new Pill(name,pill.getId(), veny));
+                        break;
+                    }catch (HibasVeny hv){
+                        System.out.println("Hibás veny érték");
+                    }catch (Exception e){
+                        System.out.println("nem szám Veny érték");
+                        scanner.nextLine();
+                    }
+                }
+            }
+        }
+        System.out.println("Pill is successfully modified veny.");
+        return;
+    }
+
     private static void deletePill(ArrayList<Pill> pills) {
-        System.out.print("Enter name of user what you want to delete: ");
+        System.out.print("Enter name of pill what you want to delete: ");
         String name = scanner.nextLine();
         for (Pill pill : pills) {
             if (pill.getName().equals(name)) {
@@ -81,24 +133,45 @@ public class Pills {
     }
 
     private static void addNewPill(ArrayList<Pill> pills) {
-        System.out.print("Enter name of new pill: ");
-        String name = scanner.nextLine();
 
-        System.out.print("Enter id of new pilll: ");
-        int id = scanner.nextInt();
+        String name ="";
+        while(true){
+
+            System.out.print("Enter name of new pill: ");
+            try{
+                name = scanner.nextLine();
+                for (int i = 0; i < pills.size(); i++) {
+                    if(name.equals(pills.get(i).getName())){
+                        throw new HibasName();
+                    }
+                }
+                break;
+            }catch (HibasName hn){
+                System.out.println("Már létezik ilyen nevü pill,\n elöbb törölje a már meglévőt és kezdje ujra a folyamatot");
+            }
+
+        }
+
+
+        String id = IdletezikBe(pills);
 
         int veny =0;
         while(true){
 
-            System.out.print("Enter veny of new pilll (1 if veny 0 if not veny): ");
+            System.out.print("Enter veny of new pill (1 if veny 0 if not veny): ");
+            veny =0;
             try{
                 veny = scanner.nextInt();
+                scanner.nextLine();
                 if(veny!=0 && veny !=1){
                     throw new HibasVeny();
                 }
                 break;
             }catch (HibasVeny hv){
                 System.out.println("Hibás veny érték");
+            }catch (InputMismatchException e){
+                System.out.println(e.getMessage());
+                scanner.nextLine();
             }
 
         }
@@ -132,8 +205,7 @@ public class Pills {
                 Element pillElement = document.createElement("pills");
                 rootElement.appendChild(pillElement);
                 createChildElement(document, pillElement, "name", pill.getName());
-                createChildElement(document, pillElement, "id",
-                        String.valueOf(pill.getId()));
+                createChildElement(document, pillElement, "id", pill.getId());
                 createChildElement(document, pillElement, "veny",  String.valueOf(pill.getVeny()));
 
             }
@@ -158,8 +230,47 @@ public class Pills {
         parent.appendChild(element);
     }
 
+    public static String IdletezikBe(ArrayList<Pill> pills ){
+        String id ="";
+        while(true){
+
+            System.out.print("Enter id (max 10 karakter): ");
+            try{
+                id = scanner.nextLine();
+                for (int i = 0; i < pills.size(); i++) {
+                    if(id.equals(pills.get(i).getId())){
+                        throw new LetezoId();
+                    }
+                    if(id.length()>10) {
+                        throw new HibasId();
+                    }
+                }
+                break;
+            }catch (HibasId hi){
+                System.out.println("Túl hosszu id érték");
+            }catch (LetezoId hi){
+                System.out.println("Már Létezik ilyen idval rendelkező Pill");
+            }
+
+        }
+        return id;
+    }
+
 }
 
 class HibasVeny extends Exception{
 
         }
+
+class HibasId extends Exception{
+
+}
+
+class HibasName extends Exception{
+
+}
+class LetezoId extends Exception{
+
+}
+
+

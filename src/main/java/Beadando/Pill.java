@@ -2,21 +2,10 @@ package Beadando;
 
 public class Pill {
     private String name;
-    private int id;
+    private String id;
     private int veny; //if 1 is veny, if 0 is not veny
-    /*
-    public Pill(String name, int id, int veny) {
-        this(name, id, veny);
-    }
 
-    public Pill(String name, int id,int veny) {
-        this.name = name;
-        this.id = id;
-        this.veny = veny;
-
-    }*/
-
-    public Pill(String name, int id, int veny) {
+    public Pill(String name, String id, int veny) {
         this.name = name;
         this.id = id;
         this.veny = veny;
@@ -30,11 +19,11 @@ public class Pill {
         this.name = name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
