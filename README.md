@@ -24,6 +24,7 @@ Első sorban a főmenüt hozza be, ahol 4 opciónk van,
 2.	Add new pill -> Uj elem hozzáadása az xml fájlhoz
 3.	Modify a pill -> Elem módósítása
 4.	Delete a pill -> Elem törlése
+
 0.	Exit -> Kilépés a programból
 
 ## 2.Add new pill
@@ -37,6 +38,7 @@ A hozzá adni kívánt elemet beirás közben ellenörzi hogy létezik e már az
 Bekér egy Pill nevet melyet ha tartalmaz az xml fájl akkor feladja az alábbi választásokat:
 1.	Modify Id-> Az elöbiekben megadott névhez tartozó elem id-ját lehet modosítani, ellenörzi hogy létezik e már az adott id
 2.	Modify Veny -> Az elöbiekben megadott névhez tartozó elem veny értéket lehet modosítani
+
 0.	Cancel -> Kilépés a Főmenübe
 
 ## 4.Delete a pill
@@ -45,4 +47,5 @@ Bekér egy Pill nevet melyet ha tartalmaz az xml fájl akkor feladja az alábbi 
 
 1.	Delete about Name-> Ez után a választás után lehet megadni nevet ami alapján ki töröll egy elemet ha megtalálja az xml fájlban az adott nevet
 2.	Delete about Id -> Ez után a választás után lehet megadni id-t ami alapján ki töröll egy elemet ha megtalálja az xml fájlban az adott id-t
+
 0.	Cancel -> Kilépés a Főmenübe
